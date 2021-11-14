@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_head">
+<title>Gerenciador de Produtos</title>
+
+<!-- styles-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/cosmo/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-6SQbkR6/v7QGEoFg1os3KF4uJMFxP6vxm6vLCSbbwwHllJdb4FqkWMiYLtHWGGN4"
+	crossorigin="anonymous">
+
+<link rel="stylesheet" href="/css/app.css" />
+
+<!-- scripts -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top"
+		th:fragment="common_nav(active)">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/admin/dashboard">Citzen</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav top-menu">
+					<li th:class="${active == 'dashboard'}? 'active': null"><a
+						href="/admin/dashboard">Dashboard</a></li>
+					<li th:class="${active == 'products'}? 'active': null"><a
+						href="/admin/products">Produtos</a></li>
+					<li th:class="${active == 'logs'}? 'active': null"><a
+						href="/admin/logs">Logs</a></li>
+					<li th:class="${active == 'settings'}? 'active': null"><a
+						href="/admin/settings">Configurações</a></li>
+					<li><a href="/logout">Sair</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+	<div class="col-md-2  col-sm-3 sidebar"
+		th:fragment="common_sidebar(menu)">
+		<div class="sidebar-menu">
+			<div class="list-group">
+				<a href="/admin/dashboard"
+					th:class="${menu == 'dashboard'}? 'list-group-item active': 'list-group-item'">
+					<i class="glyphicon glyphicon-dashboard"></i> Dashboard
+				</a> <a href="/admin/products"
+					th:class="${menu == 'products'}? 'list-group-item active': 'list-group-item'">
+					<i class="glyphicon glyphicon-gift"></i> Produtos
+				</a> <a href="/admin/logs"
+					th:class="${menu == 'logs'}? 'list-group-item active': 'list-group-item'">
+					<i class="glyphicon glyphicon-list-alt"></i> Logs
+				</a> <a href="/admin/settings"
+					th:class="${menu == 'settings'}? 'list-group-item active': 'list-group-item'">
+					<i class="glyphicon glyphicon-cog"></i> Configurações
+				</a> <a href="/logout" class="list-group-item"><i
+					class="glyphicon glyphicon-log-out"></i> Sair</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" th:fragment="common_script"
+		src="/js/app.js"></script>
+</body>
+</html>

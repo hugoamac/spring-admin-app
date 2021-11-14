@@ -1,0 +1,71 @@
+body {
+  padding-top: 50px;
+ 
+ 
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+ 
+  font-family: 'Roboto', sans-serif;
+}
+
+.bg-principal{
+	
+	background: #f5f5f5;
+}
+.sidebar{
+	min-height:1000px;
+	background: #f5f5f5;
+}
+.sidebar-menu .list-group{
+	
+	padding-top:40px;
+}
+.sidebar-menu .list-group-item{
+	
+	background: none;
+	border:none;
+}
+.sidebar-menu a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.active:hover {
+	
+	color:#555;
+	font-weight:bold;
+	background:none;
+}
+.content{
+	min-height:1000px;
+	padding-left:80px;
+	padding-right:80px;
+	background: #fff;
+}
+.title{
+	
+	padding-top:20px;
+	padding-bottom:40px;
+	
+}
+.title h2{
+	font-weight:bolder;
+	color: #999999;
+}
+
+.data-grid{
+	
+	padding-top:50px;
+}
+.upload-info{
+	
+	margin-top:10px;
+	margin-bottom: 10px;
+}
+
+@media (max-width: 768px) { 
+
+		.sidebar{
+			display:none;
+		}	
+}
+@media (min-width: 768px) { 
+
+		.top-menu{
+			display:none;
+		}	
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin_template :: common_head"></head>
+
+<body>
+
+	<nav th:replace="admin_template :: common_nav(logs)"></nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- sidebar -->
+			<div th:replace="admin_template :: common_sidebar(logs)"></div>
+			<!--  final sidebar -->
+			<!-- content -->
+			<div class="col-md-10 col-sm-9 content">
+
+				<div class="title">
+					<h2>Logs</h2>
+				</div>
+
+				<form method="get" autocomplete="off">
+					<div class="input-group">
+						<span class="input-group-addon" id="keyname"> <i
+							class="glyphicon glyphicon-search"></i>
+						</span> <input type="text" class="form-control input-md" name="keyname"
+							id="keyname"
+							placeholder="Digite o produto que você deseja pesquisar!" />
+						<div class="input-group-btn">
+							<button type="submit" class="btn btn-default btn-md">
+								<i class="glyphicon glyphicon-search"></i> Pesquisar
+							</button>
+						</div>
+					</div>
+				</form>
+
+				<div class="data-grid">
+					<p class="lead" th:text="'Total de registros: '+ ${logs.size()}"></p>
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>Info</th>
+								<th>Criado</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="log : ${logs}">
+
+								<td th:text="${log.info}">Info</td>
+								<td th:text="${log.createdAt}">Criado</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--  final content -->
+		</div>
+	</div>
+
+</body>
+</html>

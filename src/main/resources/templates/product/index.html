@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin_template :: common_head"></head>
+
+<body>
+
+	<nav th:replace="admin_template :: common_nav(products)"></nav>
+
+	<div class="container-fluid">
+		<div class="row bg-principal">
+			<!-- sidebar -->
+			<div th:replace="admin_template :: common_sidebar(products)"></div>
+			<!--  final sidebar -->
+			<!-- content -->
+			<div class="col-md-10 col-sm-9 content">
+
+				<div class="title">
+					<h2>Gerenciar Produtos</h2>
+				</div>
+
+				<form method="get" autocomplete="off" th:action="@{'?page=1'}">
+					<div class="input-group">
+						<span class="input-group-addon" id="keyname"> <i
+							class="glyphicon glyphicon-search"></i>
+						</span> <input type="text" class="form-control input-md" name="keyname"
+							id="keyname"
+							placeholder="Digite o produto que você deseja pesquisar!" th:value="${keyname}"/>
+						<div class="input-group-btn">
+							<button type="submit" class="btn btn-danger btn-md">
+								<i class="glyphicon glyphicon-search"></i> Pesquisar
+							</button>
+							<button class="btn btn-warning btn-md" type="button"
+								data-toggle="modal" data-target="#myModal">
+								<i class="glyphicon glyphicon-import"></i> Importar dados
+							</button>
+							<button class="btn btn-default btn-md" type="button">
+								<i class="glyphicon glyphicon-save"></i> Exportar csv
+							</button>
+						</div>
+					</div>
+				</form>
+
+				<div class="data-grid" th:if="${totalItems>0}">
+					
+					<div class="row">
+						<div class="col-md-10">Total: <span class="badge">[[${totalItems}]]</span></div>
+						<div class="col-md-2">Page: <span class="badge">[[${currentPage}]] / [[${totalPages}]] </span></div>
+					</div>
+					
+					<br/>
+					
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+
+								<th>Nome</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product : ${products}">
+
+								<td th:text="${product.name}">Nome</td>
+								<td>
+									<div class="btn-group">
+										<a class="btn btn-primary btn-xs" href="#" title="editar">
+											<i class="glyphicon glyphicon-edit"></i>
+										</a> <a class="btn btn-danger btn-xs" href="#" title="apagar">
+											<i class="glyphicon glyphicon-trash"></i>
+										</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<nav aria-label="Page navigation">
+						<ul class="pagination pagination-sm">
+							<li th:if="${currentPage > 1}">
+								<a th:href="@{'?page='+ ${currentPage - 1} + '&keyname=' + ${keyname}}" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li th:each="i:${#numbers.sequence(1,totalPages)}" th:class="${i==currentPage?'active':'disable'}">
+								<a th:href="@{'?page='+ ${i} + '&keyname=' + ${keyname} }" th:text="${i}"></a>
+							</li>
+							<li th:if="${(currentPage+1) <= totalPages }">
+								<a th:href="@{'?page='+ ${currentPage + 1} + '&keyname=' + ${keyname}}" aria-label="Next"> 
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+			</div>
+			<!--  final content -->
+		</div>
+	</div>
+
+	<!--  modal  for upload  -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Importar Dados</h4>
+				</div>
+				<div class="modal-body">
+					<p class="alert alert-warning">Obs.: Favor importar somente
+						arquivo com extensão .csv.</p>
+					<form method="post" enctype="multipart/form-data" id="uploadForm">
+						<div class="form-group">
+							<input type="file" name="inputFile" id="inputFile" />
+							<div class="alert upload-info" id="uploadInfo"></div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="sendFile">
+						<i class="glyphicon glyphicon-save"></i>Enviar
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!--  final modal -->
+	<script th:replace="admin_template :: common_script"></script>
+	<script type="text/javascript" src="/js/upload.js"></script>
+</body>
+</html>
